@@ -44,5 +44,5 @@ if echo "$_remo_exporter_tag" | grep -q "^v"; then
 	docker_push_all "${_docker_repo}" "latest"
 elif echo "$_remo_exporter_tag" | grep -q "master"; then
 	docker_push_all "${_docker_repo}" "master"
-	docker push "kenfdev/remo-exporter-dev:${_remo_exporter_version}"
+	docker push "${_docker_repo}-dev:${_remo_exporter_version}"
 fi

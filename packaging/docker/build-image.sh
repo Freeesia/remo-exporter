@@ -40,10 +40,10 @@ docker_build "alpine:3.9" "remo-exporter-linux-amd64" "${_docker_repo}:${_remo_e
 docker_build "arm32v6/alpine:3.9" "remo-exporter-linux-armv7" "${_docker_repo}-linux-arm32v7:${_remo_exporter_version}"
 docker_build "arm64v8/alpine:3.9" "remo-exporter-linux-arm64" "${_docker_repo}-linux-arm64v8:${_remo_exporter_version}"
 
-# Tag as 'latest' for official release; otherwise tag as kenfdev/remo-exporter:master
+# Tag as 'latest' for official release; otherwise tag as ${_docker_repo}:master
 if echo "$_remo_exporter_tag" | grep -q "^v"; then
 	docker_tag_all "${_docker_repo}" "latest"
 else
 	docker_tag_all "${_docker_repo}" "master"
-	docker tag "${_docker_repo}:${_remo_exporter_version}" "kenfdev/remo-exporter-dev:${_remo_exporter_version}"
+	docker tag "${_docker_repo}:${_remo_exporter_version}" "${_docker_repo}-dev:${_remo_exporter_version}"
 fi
