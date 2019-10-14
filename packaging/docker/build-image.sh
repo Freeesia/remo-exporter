@@ -1,4 +1,5 @@
 #!/bin/sh
+cd `dirname $0`/../..
 
 _remo_exporter_tag=$1
 _docker_repo=${2:-kenfdev/remo-exporter}
@@ -24,6 +25,7 @@ docker_build () {
 		--build-arg BASE_IMAGE=${base_image} \
 		--build-arg EXPORTER_BINARY=${exporter_binary} \
 		--tag "${tag}" \
+		--file ./packaging/docker/Dockerfile \
 		--no-cache=true .
 }
 

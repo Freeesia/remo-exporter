@@ -1,8 +1,14 @@
-ARG BASE_IMAGE=alpine:3.18
+ARG BASE_IMAGE=alpine:3.9
+
+FROM golang:alpine AS build-env
+WORKDIR /go/src/github.com/kenfdev/remo-exporter
+COPY . .
+RUN sh ./scripts/build-bin.sh
+
 FROM ${BASE_IMAGE}
 
 ARG EXPORTER_BINARY="remo-exporter-linux-amd64"
-COPY ${EXPORTER_BINARY} ./remo-exporter
+COPY --from=build-env /go/src/github.com/kenfdev/remo-exporter/dist/${EXPORTER_BINARY} ./remo-exporter
 
 RUN apk --no-cache add ca-certificates \
      && addgroup exporter \
