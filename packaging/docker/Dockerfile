@@ -1,6 +1,6 @@
 ARG BASE_IMAGE=alpine:3.9
 
-FROM golang:alpine AS build-env
+FROM golang:1.11.5-alpine AS build-env
 WORKDIR /go/src/github.com/kenfdev/remo-exporter
 COPY . .
 RUN sh ./scripts/build-bin.sh
